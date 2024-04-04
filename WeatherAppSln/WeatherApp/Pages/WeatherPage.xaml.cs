@@ -6,15 +6,27 @@ namespace WeatherApp.Pages;
 public partial class WeatherPage : ContentPage
 {
     // Properties
-    private double _test;
-    public double Test
+    private double _tempreture;
+    public double Tempreture
     {
-        get { return _test; }
-        set { 
-            _test = value; 
-            OnPropertyChanged();
-        }
+        get { return _tempreture; }
+        set { _tempreture = value; }
     }
+
+    private int _humidity;
+    public int Humidity
+    {
+        get { return _humidity; }
+        set { _humidity = value; }
+    }
+
+    private double _windspeed;
+    public double WindSpeed
+    {
+        get { return _windspeed; }
+        set { _windspeed = value; }
+    }
+
 
     private HttpClient _httpClient;
     public WeatherPage()
@@ -22,6 +34,7 @@ public partial class WeatherPage : ContentPage
         InitializeComponent();
         _httpClient = new HttpClient();
         BindingContext = this;
+
         // Request Header
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/json"); 
         GetWeather(_httpClient);
@@ -38,7 +51,9 @@ public partial class WeatherPage : ContentPage
         // Getting the info out the class and displaying it
         if (info != null)
         {
-            Test = info.main.temp;
+            Tempreture = info.main.temp;
+            WindSpeed = info.wind.speed;
+            Humidity = info.main.humidity;
         }
     }
 }
