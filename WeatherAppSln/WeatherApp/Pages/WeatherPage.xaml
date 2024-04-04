@@ -8,5 +8,6 @@
             Text="Welcome to Weather App"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label Text="{Binding Test}" />
     </VerticalStackLayout>
 </ContentPage>
