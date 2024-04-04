@@ -18,22 +18,23 @@ public partial class WeatherPage : ContentPage
     {
         InitializeComponent();
         _httpClient = new HttpClient();
+        BindingContext = this;
         // Request Header
-        _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+        _httpClient.DefaultRequestHeaders.Add("Accept", "application/json"); 
     }
 
     public async void GetLatestJoke(object parameters)
     {
-        // Gets the Dad Joke Api and its data and saves it in "response"
+        // Gets the Weather Api and its data and saves it in "response"
         string response = await _httpClient.GetStringAsync(new Uri("https://icanhazdadjoke.com"));
 
         // Turning the response from JSON to C#
-        WeatherInfo latestjoke = JsonConvert.DeserializeObject<WeatherInfo>(response);
+        WeatherInfo info = JsonConvert.DeserializeObject<WeatherInfo>(response);
 
-        // Getting the joke out the class and displaying it
-        if (latestjoke != null)
+        // Getting the info out the class and displaying it
+        if (info != null)
         {
-            Test = latestjoke.Temperture;
+            Test = info.Temperture;
         }
     }
 }
