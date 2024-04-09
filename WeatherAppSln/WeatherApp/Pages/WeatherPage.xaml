@@ -9,7 +9,34 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <Label Text="{Binding Tempreture}" HorizontalOptions="Center"/>
-        <Label Text="{Binding Test}" HorizontalOptions="Center"/>
+        <StackLayout Margin="0, 30, 0, 0">
+            <Frame Margin="20" HeightRequest="600">
+                <StackLayout>
+                    <Frame HeightRequest="300">
+                        <StackLayout>
+                            <Label Text="Image Here" HorizontalOptions="Center"/>
+                            <Label Text="Temperture" HorizontalOptions="Center"/>
+                            <Label Text="location" HorizontalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout>
+                        <Frame Margin="0, 20, 0, 0" HeightRequest="200">
+                            <HorizontalStackLayout>
+                                <Frame Margin="5, 0, 0, 0" WidthRequest="120">
+                                    <StackLayout>
+                                        <Label Text="Wind Speed" HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame Margin="20, 0, 0, 0" WidthRequest="120">
+                                    <StackLayout>
+                                        <Label Text="Humidty" HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Frame>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
     </VerticalStackLayout>
 </ContentPage>
