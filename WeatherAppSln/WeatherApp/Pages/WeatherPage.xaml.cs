@@ -57,6 +57,18 @@ public partial class WeatherPage : ContentPage
             OnPropertyChanged();
         }
     }
+    private string _currentlocation;
+
+    public string CurrentLocation
+    {
+        get { return _currentlocation; }
+        set 
+        { 
+            _currentlocation = value;
+            OnPropertyChanged();
+        }
+    }
+
 
 
     private HttpClient _httpClient;
@@ -68,13 +80,28 @@ public partial class WeatherPage : ContentPage
 
         // Request Header
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/json"); 
+        //GetWeather(_httpClient);
+    }
+    
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
         GetWeather(_httpClient);
     }
 
-    public async void GetWeather(object parameters)
+    public async Task<WeatherInformtaion> GetWeather(object parameters)
     {
+        var details = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        if (details != PermissionStatus.Granted)
+        {
+            details = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+        }
+        var location = await Geolocation.GetLocationAsync();
+        var lon = location.Longitude;
+        var lat = location.Latitude;
+
         // Gets the Weather Api and its data and saves it in "response"
-        string response = await _httpClient.GetStringAsync(new Uri("https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&units=metric&appid=22d84222850961e3fe8cc19c603cab33"));
+        string response = await _httpClient.GetStringAsync(new Uri($"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid=22d84222850961e3fe8cc19c603cab33"));
 
         // Turning the response from JSON to C#
         WeatherInformtaion info = JsonConvert.DeserializeObject<WeatherInformtaion>(response);
@@ -85,7 +112,8 @@ public partial class WeatherPage : ContentPage
             Tempreture = ((int)info.main.temp);
             Windspeed = info.wind.speed;
             Humdity = info.main.humidity;
-            Country = info.name;
+            Country = info.sys.country;
+            CurrentLocation = info.name;
 
             if (info.weather.Count > 0)
             {
@@ -93,14 +121,22 @@ public partial class WeatherPage : ContentPage
                 if (weather.main == "Clouds")
                 {
                     Icons = "Resource/Images/cloudy.png";
-                } else if (weather.main == "Rain")
+                }
+                else if (weather.main == "Rain")
                 {
                     Icons = "Images/rainy.png";
-                } else
+                }
+                else
                 {
                     Icons = "sunny.png";
                 }
             }
         }
+        return info;
     }
+
+    //public async void GetWeather(object parameters)
+    //{
+        
+    //}
 }
