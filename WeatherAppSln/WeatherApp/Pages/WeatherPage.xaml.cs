@@ -17,14 +17,43 @@ public partial class WeatherPage : ContentPage
             OnPropertyChanged();
         }
     }
-
-    private double _test;
-    public double Test
+    private string _humdity;
+    public string Humdity
     {
-        get { return _test; }
+        get { return _humdity; }
         set 
         { 
-            _test = value;
+            _humdity = value;
+            OnPropertyChanged();
+        }
+    }
+    private int _windspeed;
+    public int Windspeed
+    {
+        get { return _windspeed; }
+        set 
+        { 
+            _windspeed = value;
+            OnPropertyChanged();
+        }
+    }
+    private string _country;
+    public string Country
+    {
+        get { return _country; }
+        set 
+        { 
+            _country = value;
+            OnPropertyChanged();
+        }
+    }
+    private string _icons;
+    public string Icons
+    {
+        get { return _icons; }
+        set 
+        { 
+            _icons = value;
             OnPropertyChanged();
         }
     }
@@ -54,7 +83,6 @@ public partial class WeatherPage : ContentPage
         if (info != null)
         {
             Tempreture = info.main.temp;
-            Test = info.main.temp;
             //WindSpeed = info.wind.speed;
             //Humidity = info.main.humidity;
         }
