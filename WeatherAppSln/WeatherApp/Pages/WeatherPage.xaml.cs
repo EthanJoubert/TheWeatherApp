@@ -17,8 +17,8 @@ public partial class WeatherPage : ContentPage
             OnPropertyChanged();
         }
     }
-    private string _humdity;
-    public string Humdity
+    private int _humdity;
+    public int Humdity
     {
         get { return _humdity; }
         set 
@@ -27,8 +27,8 @@ public partial class WeatherPage : ContentPage
             OnPropertyChanged();
         }
     }
-    private int _windspeed;
-    public int Windspeed
+    private double _windspeed;
+    public double Windspeed
     {
         get { return _windspeed; }
         set 
@@ -83,8 +83,24 @@ public partial class WeatherPage : ContentPage
         if (info != null)
         {
             Tempreture = info.main.temp;
-            //WindSpeed = info.wind.speed;
-            //Humidity = info.main.humidity;
+            Windspeed = info.wind.speed;
+            Humdity = info.main.humidity;
+            Country = info.sys.country;
+
+            if (info.weather.Count > 0)
+            {
+                var weather = info.weather[0];
+                if (weather.main == "Clouds")
+                {
+                    Icons = "Resource/Images/cloudy.png";
+                } else if (weather.main == "Rain")
+                {
+                    Icons = "Images/rainy.png";
+                } else
+                {
+                    Icons = "sunny.png";
+                }
+            }
         }
     }
 }

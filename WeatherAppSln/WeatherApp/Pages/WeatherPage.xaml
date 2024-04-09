@@ -10,26 +10,28 @@
             HorizontalOptions="Center" />
 
         <StackLayout Margin="0, 30, 0, 0">
-            <Frame Margin="20" HeightRequest="600">
+            <Frame Margin="10" HeightRequest="600">
                 <StackLayout>
                     <Frame HeightRequest="300">
                         <StackLayout>
-                            <Label Text="Image Here" HorizontalOptions="Center"/>
-                            <Label Text="Temperture" HorizontalOptions="Center"/>
-                            <Label Text="location" HorizontalOptions="Center" />
+                            <Image Source="{Binding Icons}" HeightRequest="100" WidthRequest="100" />
+                            <Label Text="{Binding Tempreture}" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Country}" HorizontalOptions="Center" />
                         </StackLayout>
                     </Frame>
                     <StackLayout>
                         <Frame Margin="0, 20, 0, 0" HeightRequest="200">
                             <HorizontalStackLayout>
-                                <Frame Margin="5, 0, 0, 0" WidthRequest="120">
-                                    <StackLayout>
-                                        <Label Text="Wind Speed" HorizontalOptions="Center"/>
+                                <Frame Margin="5, 0, 0, 0" WidthRequest="130">
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="Wind Speed" HorizontalOptions="Center" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Windspeed, StringFormat='{}{0} km/h'}" HorizontalOptions="Center" Margin="0, 20, 0, 0" FontSize="18"/>
                                     </StackLayout>
                                 </Frame>
                                 <Frame Margin="20, 0, 0, 0" WidthRequest="120">
-                                    <StackLayout>
-                                        <Label Text="Humidty" HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="Humidty" HorizontalOptions="Center" FontSize="15" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Humdity,StringFormat='{}{0} %'}" HorizontalOptions="Center" Margin="0, 20, 0, 0" FontSize="18"/>
                                     </StackLayout>
                                 </Frame>
                             </HorizontalStackLayout>
